@@ -39,18 +39,18 @@
 define nginx::resource::upstream (
   $members,
   $ensure = 'present',
-  $upstream_cfg_prepend = undef,
+  $upstream_cfg_prepend = undef
 ) {
   File {
     owner => 'root',
     group => 'root',
-    mode  => '0644',
+    mode  => '0644'
   }
 
   file { "/etc/nginx/conf.d/${name}-upstream.conf":
     ensure  => $ensure ? {
       'absent' => absent,
-      default  => 'file',
+      default  => 'file'
     },
     content => template('nginx/conf.d/upstream.erb'),
     notify  => Class['nginx::service'],
